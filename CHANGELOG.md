@@ -5,3 +5,5 @@ This file contains the changelog of the Rpic Server application. The changelog i
 This file follows the [Keep a Changelog format](https://keepachangelog.com/en/1.1.0/) and the Semantic Versioning specification.
 
 ## Unreleased
+
+- CMake: added `rpic-server` target.
