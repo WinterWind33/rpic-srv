@@ -14,3 +14,6 @@ set (RPI_SERVER_SRC
 )
 
 add_executable(rpic_server ${RPI_SERVER_SRC})
+set_target_properties(rpic_server PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
