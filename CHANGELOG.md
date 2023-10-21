@@ -6,5 +6,6 @@ This file follows the [Keep a Changelog format](https://keepachangelog.com/en/1.
 
 ## Unreleased
 
+- Added version automatic generation from CMake configuration.
 - Added basic GitHub Actions workflow with Linux build using `Drogon` container.
 - CMake: added `rpic-server` target.
