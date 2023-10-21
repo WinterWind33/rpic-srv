@@ -13,22 +13,40 @@ on:
 jobs:
   gcc-13:
     runs-on: ubuntu-latest
+
+    container:
+      image: drogonframework/drogon:latest
+
     steps:
       - uses: actions/checkout@v3
       - uses: lukka/get-cmake@latest
 
+      - name: Packages preparation
+        run: |
+          apt-get update
+          apt-get install -y software-properties-common gpg-agent curl zip unzip tar
+          add-apt-repository ppa:ubuntu-toolchain-r/test -y
+
       - name: Configure compiler
         run: |
+          sudo apt-get update
           sudo apt-get install -y g++-13
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 90
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 90
           sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 90
 
+      - name: Third-party dependencies configuration
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg
+          sudo ./bootstrap-vcpkg.sh
+          sudo ./vcpkg install ms-gsl gtest neargye-semver --triplet x64-linux
+
       - name: CMake configure
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: CMake build
         run: |
