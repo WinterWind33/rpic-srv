@@ -1,10 +1,9 @@
 // Copyright (c) 2023 Andrea Ballestrazzi
-#pragma once
+export module RpicServer.ServerVersion;
 
 // C++ STL
-#include <string_view>
-
-#include <neargye/semver.hpp>
+export import <string_view>;
+export import <neargye/semver.hpp>;
 
 namespace rpic_server::version {
 
@@ -31,7 +30,7 @@ namespace details {
 //!
 //! \brief Get the server version.
 //!
-[[nodiscard]] constexpr auto getServerVersion() noexcept {
+export [[nodiscard]] constexpr auto getServerVersion() noexcept {
     return semver::version{${RPIC_SERVER_VERSION_MAJOR}, ${RPIC_SERVER_VERSION_MINOR},
                            ${RPIC_SERVER_VERSION_PATCH}, details::getServerPrerelease()};
 }

@@ -23,12 +23,12 @@ set(RPIC_SERVER_VERSION_PRERELEASE "alpha")
 set(RPIC_SERVER_VERSION "${RPIC_SERVER_VERSION_MAJOR}.${RPIC_SERVER_VERSION_MINOR}.${RPIC_SERVER_VERSION_PATCH}")
 set(RPIC_GENERATED_FILES_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 
-configure_file(src/server-version.hpp.in ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
+configure_file(src/server-version.hpp.in ${RPIC_GENERATED_FILES_DIR}/server-version.ixx)
 
 ###########################
 # Rpic Server Executable
 ###########################
-add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
+add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.ixx)
 target_link_libraries(rpic_server PRIVATE Microsoft.GSL::GSL Drogon::Drogon)
 set_target_properties(rpic_server PROPERTIES
     VERSION ${RPIC_SERVER_VERSION}
