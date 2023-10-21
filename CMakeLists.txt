@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 # If the compiler is GCC we want to enable modules support
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+    add_compile_options(-fmodules-ts)
 endif()
 
 project(rpic_server VERSION 0.1.0 LANGUAGES CXX)
