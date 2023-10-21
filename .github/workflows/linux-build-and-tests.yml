@@ -24,7 +24,7 @@ jobs:
       - name: Configure compiler
         run: |
           apt-get update
-          apt-get install -y software-properties-common
+          apt-get install -y software-properties-common gpg-agent
           add-apt-repository ppa:ubuntu-toolchain-r/test -y
           apt-get update
           sudo apt-get install -y g++-13
