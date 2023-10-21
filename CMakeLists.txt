@@ -10,6 +10,7 @@ project(rpic_server VERSION 0.1.0 LANGUAGES CXX)
 ###########################
 find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+find_package(Drogon CONFIG REQUIRED)
 find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 
 ###########################
@@ -17,7 +18,8 @@ find_path(NEARGYE_SEMVER_INCLUDE_DIRS "neargye/semver.hpp")
 ###########################
 
 add_executable(rpic_server "src/entry-point.cpp")
-target_include_directories(rpic_server PRIVATE ${NEARGYE_SEMVER_INCLUDE_DIRS} Microsoft.GSL::GSL)
+target_include_directories(rpic_server PRIVATE ${NEARGYE_SEMVER_INCLUDE_DIRS})
+target_link_libraries(rpic_server PRIVATE Microsoft.GSL::GSL Drogon::Drogon)
 set_target_properties(rpic_server PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
