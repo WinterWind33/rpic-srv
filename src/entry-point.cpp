@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Andrea Ballestrazzi
 
+// C++ STL
 #include <iostream>
-#include <neargye/semver.hpp>
 
 #include "server-version.hpp"
 
