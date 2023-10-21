@@ -13,6 +13,10 @@ on:
 jobs:
   gcc-13:
     runs-on: ubuntu-latest
+
+    container:
+      image: drogonframework/drogon:latest
+
     steps:
       - uses: actions/checkout@v3
       - uses: lukka/get-cmake@latest
