@@ -3,7 +3,7 @@
 // C++ STL
 #include <iostream>
 
-import RpicServer.ServerVersion;
+#include "server-version.hpp"
 
 int main(int argc, char* argv[]) {
     std::cout << rpic_server::version::getServerVersion() << std::endl;

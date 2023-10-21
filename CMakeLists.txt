@@ -3,12 +3,6 @@ cmake_minimum_required(VERSION 3.27.7)
 
 set(CMAKE_CXX_STANDARD 23)
 
-# If the compiler is GCC we want to enable modules support
-if(LINUX)
-    message(STATUS "Enabling modules support for GCC")
-    add_compile_options("-fmodules-ts")
-endif()
-
 project(rpic_server VERSION 0.1.0 LANGUAGES CXX)
 
 ###########################
@@ -29,12 +23,12 @@ set(RPIC_SERVER_VERSION_PRERELEASE "alpha")
 set(RPIC_SERVER_VERSION "${RPIC_SERVER_VERSION_MAJOR}.${RPIC_SERVER_VERSION_MINOR}.${RPIC_SERVER_VERSION_PATCH}")
 set(RPIC_GENERATED_FILES_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 
-configure_file(src/server-version.ixx.in ${RPIC_GENERATED_FILES_DIR}/server-version.ixx)
+configure_file(src/server-version.hpp.in ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
 
 ###########################
 # Rpic Server Executable
 ###########################
-add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.ixx)
+add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
 target_link_libraries(rpic_server PRIVATE Microsoft.GSL::GSL Drogon::Drogon)
 set_target_properties(rpic_server PROPERTIES
     VERSION ${RPIC_SERVER_VERSION}
