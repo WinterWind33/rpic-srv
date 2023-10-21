@@ -33,7 +33,7 @@ jobs:
           git clone https://github.com/microsoft/vcpkg.git
           cd vcpkg
           sudo ./bootstrap-vcpkg.sh
-          sudo ./vcpkg install ms-gsl gtest neargye-semver drogon --triplet x64-linux
+          sudo ./vcpkg install ms-gsl gtest neargye-semver --triplet x64-linux
 
       - name: CMake configure
         run: |
