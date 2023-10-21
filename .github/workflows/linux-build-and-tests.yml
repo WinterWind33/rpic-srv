@@ -17,6 +17,10 @@ jobs:
     container:
       image: drogonframework/drogon:latest
 
+    env:
+      CC: gcc-13
+      CXX: g++-13
+
     steps:
       - uses: actions/checkout@v3
       - uses: lukka/get-cmake@latest
