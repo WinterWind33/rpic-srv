@@ -1,0 +1,21 @@
+{
+    "app": {
+        "threads_num": 0,
+        "run_as_daemon": true,
+        "log": {
+            "log_path": "./logs",
+            "logfile_base_name": "",
+            "log_size_limit": 3000000,
+            "log_level": "INFO"
+        },
+        "use_sendfile": true,
+        "idle_connection_timeout": 60
+    },
+    "listeners": [
+        {
+            "address": "0.0.0.0",
+            "port": 8000,
+            "https": false
+        }
+    ]
+}
