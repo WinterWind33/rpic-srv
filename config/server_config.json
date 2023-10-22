@@ -9,7 +9,8 @@
         },
         "use_sendfile": true,
         "idle_connection_timeout": 60,
-        "upload_path": "./uploads"
+        "upload_path": "./uploads",
+        "document_root": "./www/ControllerWebsite"
     },
     "listeners": [
         {

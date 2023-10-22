@@ -50,3 +50,10 @@ add_custom_command(TARGET rpic_server POST_BUILD
         $<TARGET_FILE_DIR:rpic_server>
 )
 
+# Copy the web folder to the installation directory
+# Note: this is temporary until there is an installation process.
+add_custom_command(TARGET rpic_server POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/web
+        $<TARGET_FILE_DIR:rpic_server>/www
+)
