@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Rpic Server Health Check</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link media="all" rel="stylesheet" href="css/health-check.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Rpic Server Health Check</h1>
+    <div class="success-elevated-region">
+        <p>Server is up and running.</p>
+    </div>
+    <div>
+        <h2>Informations</h2>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td><strong>Server Version</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Server Backend</strong></td>
+                <td>Drogon</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        fetch("/server-info")
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector("table tr:nth-child(2) td:nth-child(2)").innerHTML = data.server_version;
+            });
+    </script>
+</body>
+
+</html>
