@@ -6,9 +6,9 @@
 
 namespace rpic_server::patterns {
 
-//!
-//! \brief The path for the health check endpoint.
-//!
+/**
+ * @brief The pattern for the server health check.
+ */
 constexpr std::string_view HEALTH_CHECK_PATH{"/health-check"};
 
 } // namespace rpic_server::patterns

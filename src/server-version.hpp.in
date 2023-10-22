@@ -10,9 +10,12 @@ namespace rpic_server::version {
 
 namespace details {
 
-//!
-//! \brief Get the server prerelease version if set. Otherwise, return none.
-//!
+/**
+ * @brief Get the Server prerelease value or none if the prerelease is not
+ *      specified.
+ *
+ * @return The Server prerelease value.
+ */
 [[nodiscard]] constexpr semver::prerelease getServerPrerelease() noexcept {
     constexpr std::string_view prelease{"${RPIC_SERVER_VERSION_PRERELEASE}"};
 
@@ -28,9 +31,11 @@ namespace details {
 }
 } // namespace details
 
-//!
-//! \brief Get the server version.
-//!
+/**
+ * @brief Retrieves the server version.
+ *
+ * @return The server version.
+ */
 [[nodiscard]] constexpr auto getServerVersion() noexcept {
     return semver::version{${RPIC_SERVER_VERSION_MAJOR}, ${RPIC_SERVER_VERSION_MINOR},
                            ${RPIC_SERVER_VERSION_PATCH}, details::getServerPrerelease()};
