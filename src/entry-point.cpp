@@ -36,16 +36,32 @@ int main(int argc, char* argv[]) {
     serverApp.enableRunAsDaemon();
 #endif // _WIN32
 
-    // Now we register the health check pattern so that
-    // clients can know if the server is running.
-    serverApp.registerHandler(std::string{rpic_server::patterns::HEALTH_CHECK_PATH},
-                              [](const drogon::HttpRequestPtr& req,
-                                 std::function<void(const drogon::HttpResponsePtr&)>&& callback) {
-                                  auto resp{drogon::HttpResponse::newHttpResponse()};
-                                  resp->setStatusCode(drogon::HttpStatusCode::k200OK);
-                                  resp->setBody("OK");
-                                  callback(resp);
-                              });
+    // When the user sends a health-check request we must send the health-check.html file
+    // back.
+    serverApp.registerHandler(
+        std::string{rpic_server::patterns::HEALTH_CHECK_PATH},
+        [](const drogon::HttpRequestPtr& req,
+           std::function<void(const drogon::HttpResponsePtr&)>&& callback) {
+            auto resp{drogon::HttpResponse::newRedirectionResponse("/health-check.html")};
+
+            callback(resp);
+        });
+
+    // We register the info pattern so that clients can know
+    // the version of the server.
+    serverApp.registerHandler(
+        std::string{rpic_server::patterns::SERVER_INFO_PATH},
+        [](const drogon::HttpRequestPtr& req,
+           std::function<void(const drogon::HttpResponsePtr&)>&& callback) {
+            auto resp{drogon::HttpResponse::newHttpResponse()};
+            resp->setStatusCode(drogon::HttpStatusCode::k200OK);
+
+            resp->setContentTypeCode(drogon::CT_APPLICATION_JSON);
+            resp->setBody("{\"server_version\": \"" +
+                          rpic_server::version::getServerVersion().to_string() + "\"}");
+
+            callback(resp);
+        });
 
     serverApp.run();
 
