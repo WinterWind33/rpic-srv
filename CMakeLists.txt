@@ -28,7 +28,13 @@ configure_file(src/server-version.hpp.in ${RPIC_GENERATED_FILES_DIR}/server-vers
 ###########################
 # Rpic Server Executable
 ###########################
-add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
+
+set(RPIC_SERVER_HEADER_FILES
+    ${RPIC_GENERATED_FILES_DIR}/server-version.hpp
+    src/server-patterns.hpp
+)
+
+add_executable(rpic_server "src/entry-point.cpp" ${RPIC_SERVER_HEADER_FILES})
 target_link_libraries(rpic_server PRIVATE Microsoft.GSL::GSL Drogon::Drogon)
 set_target_properties(rpic_server PROPERTIES
     VERSION ${RPIC_SERVER_VERSION}
@@ -36,3 +42,18 @@ set_target_properties(rpic_server PROPERTIES
 )
 
 target_include_directories(rpic_server PRIVATE ${NEARGYE_SEMVER_INCLUDE_DIRS} ${RPIC_GENERATED_FILES_DIR})
+
+# Add post-build command to copy server_config.json to output directory
+add_custom_command(TARGET rpic_server POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/config/server_config.json
+        $<TARGET_FILE_DIR:rpic_server>
+)
+
+# Copy the web folder to the installation directory
+# Note: this is temporary until there is an installation process.
+add_custom_command(TARGET rpic_server POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/web
+        $<TARGET_FILE_DIR:rpic_server>/www
+)
