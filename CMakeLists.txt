@@ -42,3 +42,11 @@ set_target_properties(rpic_server PROPERTIES
 )
 
 target_include_directories(rpic_server PRIVATE ${NEARGYE_SEMVER_INCLUDE_DIRS} ${RPIC_GENERATED_FILES_DIR})
+
+# Add post-build command to copy server_config.json to output directory
+add_custom_command(TARGET rpic_server POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/config/server_config.json
+        $<TARGET_FILE_DIR:rpic_server>
+)
+
