@@ -9,7 +9,8 @@
             "log_level": "INFO"
         },
         "use_sendfile": true,
-        "idle_connection_timeout": 60
+        "idle_connection_timeout": 60,
+        "upload_path": "./uploads"
     },
     "listeners": [
         {
