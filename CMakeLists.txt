@@ -28,7 +28,13 @@ configure_file(src/server-version.hpp.in ${RPIC_GENERATED_FILES_DIR}/server-vers
 ###########################
 # Rpic Server Executable
 ###########################
-add_executable(rpic_server "src/entry-point.cpp" ${RPIC_GENERATED_FILES_DIR}/server-version.hpp)
+
+set(RPIC_SERVER_HEADER_FILES
+    ${RPIC_GENERATED_FILES_DIR}/server-version.hpp
+    src/server-patterns.hpp
+)
+
+add_executable(rpic_server "src/entry-point.cpp" ${RPIC_SERVER_HEADER_FILES})
 target_link_libraries(rpic_server PRIVATE Microsoft.GSL::GSL Drogon::Drogon)
 set_target_properties(rpic_server PROPERTIES
     VERSION ${RPIC_SERVER_VERSION}
