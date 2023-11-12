@@ -2,14 +2,56 @@
 <html lang="en">
 
 <head>
-    <title>Greenhouse Controller</title>
+    <title>New Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link media="all" rel="stylesheet" href="css/main-theme.css">
+    <link media="all" rel="stylesheet" href="css/main-page.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Greenhouse Controller</h1>
+    <div class="sidebar">
+        <!-- Add your sidebar content here -->
+    </div>
+
+    <div class="main">
+        <h1>Greenhouse controller</h1>
+        <p>Here, you can create and manage your greenhouse workflows.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Workflow Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="active-workflow-table">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Fetch the workflow status data from the raspberry
+        fetch('/workflow-status')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the table with the fetched data
+                const tableBody = document.getElementById('active-workflow-table');
+                data.forEach(workflow => {
+                    const row = document.createElement('tr');
+                    const nameCell = document.createElement('td');
+                    const statusCell = document.createElement('td');
+                    nameCell.textContent = workflow.name;
+                    statusCell.textContent = workflow.status;
+                    row.appendChild(nameCell);
+                    row.appendChild(statusCell);
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
+    </div>
 </body>
 
 </html>

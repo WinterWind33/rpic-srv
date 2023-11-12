@@ -1,0 +1,14 @@
+body {
+    background-color: #1E1E1E;
+    color: #cccccc;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #ffffff;
+}
